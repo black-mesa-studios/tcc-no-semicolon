@@ -7332,7 +7332,8 @@ again:
         leave_scope(root_scope);
         if (b)
             gfunc_return(&func_vt);
-        skip(';');
+        if (tok == ';')
+	    skip(';');
         /* jump unless last stmt in top-level block */
         if (tok != '}' || local_scope != 1)
             rsym = gjmp(rsym);
@@ -7572,7 +7573,7 @@ again:
                     gexpr();
                     vpop();
                 }
-                skip(';');
+                if (tok == ';') skip(';');
             }
         }
     }
